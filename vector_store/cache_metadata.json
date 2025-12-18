@@ -1,0 +1,8 @@
+{
+  "40a40b4643b17ca0_abcd14caa55f896e": {
+    "index_path": "vector_store\\index.faiss",
+    "embeddings_path": "vector_store\\embeddings.npy",
+    "num_chunks": 4,
+    "embedding_dim": 768
+  }
+}
