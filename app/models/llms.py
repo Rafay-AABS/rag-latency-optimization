@@ -1,13 +1,18 @@
 from langchain_groq import ChatGroq
+from app.core.config import get_settings
+
+settings = get_settings()
 
 def get_drafter():
     return ChatGroq(
-        model="llama-3.1-8b-instant",
-        temperature=0
+        model=settings.DRAFTER_MODEL,
+        temperature=0,
+        api_key=settings.GROQ_API_KEY
     )
 
 def get_verifier():
     return ChatGroq(
-        model="llama-3.3-70b-versatile",
-        temperature=0
+        model=settings.VERIFIER_MODEL,
+        temperature=0,
+        api_key=settings.GROQ_API_KEY
     )

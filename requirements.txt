@@ -9,3 +9,6 @@ pypdf
 chromadb
 python-dotenv
 tiktoken
+fastapi
+uvicorn
+pydantic-settings

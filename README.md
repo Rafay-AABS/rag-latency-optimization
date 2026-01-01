@@ -60,36 +60,51 @@ User Query → Retrieval → Draft Generation (Groq Llama 3.1 8B) → Verificati
    ```
    Access Langfuse at `http://localhost:3000` and create API keys.
 
-4. **Run the Pipeline**:
+4. **Run the Application**:
+
+   **Option A: CLI Mode**
    ```bash
-   python main.py path/to/your/document.pdf
+   python -m app.main
+   # Enter PDF path when prompted
    ```
+
+   **Option B: API Server**
+   ```bash
+   uvicorn app.api:app --reload
+   ```
+   The API will be available at `http://localhost:8000`.
+   - Swagger UI: `http://localhost:8000/docs`
 
 ## Usage
 
-### Interactive Mode
+### CLI Mode
 
 ```bash
-python main.py
-# Enter PDF path when prompted
-```
-
-### Direct Mode
-
-```bash
-python main.py /path/to/document.pdf
+python -m app.main
 ```
 
 Once loaded, ask questions about your document:
 
 ```
 User: What are the main findings in this paper?
---- Draft (Groq) ---
+--- Draft ---
 [Fast initial response]
 
---- Final (Groq Verified) ---
+--- Final ---
 [Refined, verified answer]
 ```
+
+### API Mode
+
+1. Start the server: `uvicorn app.api:app`
+2. Ingest a document:
+   ```bash
+   curl -X POST "http://localhost:8000/ingest" -H "Content-Type: application/json" -d '{"pdf_path": "path/to/doc.pdf"}'
+   ```
+3. Ask a question:
+   ```bash
+   curl -X POST "http://localhost:8000/ask" -H "Content-Type: application/json" -d '{"question": "What is this about?"}'
+   ```
 
 ## How It Works
 
