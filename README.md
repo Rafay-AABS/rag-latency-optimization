@@ -24,9 +24,9 @@ User Query → Retrieval → Draft Generation (Groq Llama 3.1 8B) → Verificati
 ## Prerequisites
 
 - Python 3.9+ (recommended: 3.11 or 3.12, avoid 3.14)
-- Docker & Docker Compose (for Langfuse)
 - API Keys:
   - Groq API Key (for both drafting and verification models)
+  - Langfuse API Keys (Optional, for tracing - use Cloud or self-hosted)
 
 ## Quick Start
 
@@ -51,16 +51,10 @@ User Query → Retrieval → Draft Generation (Groq Llama 3.1 8B) → Verificati
    GROQ_API_KEY=your_groq_api_key_here
    LANGFUSE_PUBLIC_KEY=your_langfuse_public_key
    LANGFUSE_SECRET_KEY=your_langfuse_secret_key
-   LANGFUSE_HOST=http://localhost:3000
+   LANGFUSE_HOST=https://cloud.langfuse.com
    ```
 
-3. **Start Langfuse (Optional for Tracing)**:
-   ```bash
-   docker-compose up -d
-   ```
-   Access Langfuse at `http://localhost:3000` and create API keys.
-
-4. **Run the Application**:
+3. **Run the Application**:
 
    **Option A: CLI Mode**
    ```bash

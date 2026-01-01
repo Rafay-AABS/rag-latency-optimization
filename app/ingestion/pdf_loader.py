@@ -1,5 +1,9 @@
-from langchain_community.document_loaders import PyPDFLoader
+import os
+from langchain_community.document_loaders import PyPDFLoader, PyPDFDirectoryLoader
 
 def load_pdf(path: str):
-    loader = PyPDFLoader(path)
+    if os.path.isdir(path):
+        loader = PyPDFDirectoryLoader(path)
+    else:
+        loader = PyPDFLoader(path)
     return loader.load()

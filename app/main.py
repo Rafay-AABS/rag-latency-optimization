@@ -2,6 +2,9 @@ import os
 import sys
 import logging
 
+# Add project root to sys.path to allow running script directly
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from app.core.pipeline import SpeculativeRAG
 from app.core.config import get_settings
 from app.core.logging import setup_logging
@@ -20,7 +23,7 @@ def main():
     if len(sys.argv) > 1:
         pdf_path = sys.argv[1]
     else:
-        pdf_path = input("Enter path to PDF file: ").strip()
+        pdf_path = input("Enter path to PDF file or directory: ").strip()
         if pdf_path.startswith('"') and pdf_path.endswith('"'):
             pdf_path = pdf_path[1:-1]
 
@@ -60,24 +63,6 @@ def main():
             print("\n" + "-"*30 + "\n")
         except Exception as e:
             logger.error(f"Error generating answer: {e}")
-
-if __name__ == "__main__":
-    main()
-
-        try:
-            response = rag.ask(question)
-
-            print("\n--- Draft (Groq) ---")
-            print(response["draft"])
-
-            print("\n--- Final (Verified) ---")
-            print(response["final"])
-
-            print("\n" + "-" * 40 + "\n")
-
-        except Exception as e:
-            print(f"Error: {e}")
-
 
 if __name__ == "__main__":
     main()

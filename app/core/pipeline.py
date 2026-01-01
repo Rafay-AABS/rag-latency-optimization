@@ -68,7 +68,10 @@ class SpeculativeRAG:
         logger.info(f"Processing question: {question}")
         config = {}
         if self.langfuse:
+            logger.info("Attaching Langfuse callback.")
             config["callbacks"] = [self.langfuse]
+        else:
+            logger.warning("Langfuse handler is not available. Skipping tracing.")
             
         result = self.chain.invoke(question, config=config)
         
